@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<!-- Bootstrap CSS -->
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+<title>Insert title here</title>
+<style>
+	img {
+		width: 300px;
+		height: 300px;
+	}
+</style>
+</head>
+<body>
+	<div class="container mt-5">
+		<h1>[[${pizza.name}]] - [[${pizza.price}]]€</h1>
+		<p>[[${pizza.description}]]</p>
+		<div class="d-flex flex-column">
+			<img th:src="${pizza.photo}">
+			<a class="mt-3 btn btn-secondary" th:href="@{/pizzas}">Torna alle pizze</a>
+		</div>
+	</div>
+</body>
+</html>
