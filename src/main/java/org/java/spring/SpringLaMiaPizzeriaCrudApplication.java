@@ -1,6 +1,10 @@
 package org.java.spring;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.java.spring.db.serv.PizzaService;
+import org.java.spring.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +20,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	@Autowired
 	private PizzaService pizzaService;
 	
+	@Autowired
+	private SpecialOfferService specialOfferService;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -25,6 +32,14 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 		pizzaService.save(new Pizza("Pizza Rossa", "Una pizza con pomodoro", "https://media-cdn.tripadvisor.com/media/photo-s/1c/67/4a/a9/pizza-boscaiola.jpg", 7.99f));
 		pizzaService.save(new Pizza("Pizza alici", "Una pizza con alici", "https://media-cdn.tripadvisor.com/media/photo-s/1c/67/4a/a9/pizza-boscaiola.jpg", 7.99f));
 		pizzaService.save(new Pizza("Pizza Wurstel e patatine", "Una pizza wurstel e patatine", "https://i0.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2017/11/3244_Pizza.jpg?resize=895%2C616&ssl=1", 7.99f));
+	
+		List<Pizza> pizzas = pizzaService.findAll();
+		
+		specialOfferService.save(new SpecialOffer(LocalDate.now(), LocalDate.now().plusDays(3), "Speciale Offerta Natale", pizzas.get(0)));
+		specialOfferService.save(new SpecialOffer(LocalDate.now().plusDays(5), LocalDate.now().plusDays(8), "Speciale Offerta 20 anni Attività", pizzas.get(1)));
+	
 	}
+	
+	
 
 }

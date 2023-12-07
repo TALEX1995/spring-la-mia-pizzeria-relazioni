@@ -21,5 +21,17 @@
 			<a class="mt-3 btn btn-secondary" th:href="@{/pizzas}">Torna alle pizze</a>
 		</div>
 	</div>
+	<div class="container mt-5">
+		<h3>Offerte Speciali</h3>
+		<span th:if="${offers.isEmpty()}" >Non ci sono offerte speciali</span>
+		<ul th:unless="${offers.isEmpty()}">
+			<li th:each="offer : ${offers}">
+				[[${offer.title}]] - Data inizio: [[${offer.offerStart}]] - Data fine: [[${offer.offerEnd}]]
+			</li>
+		</ul>
+	</div>
+	<div class="container d-flex justify-content-end">
+		<a class="btn btn-primary" th:href="@{/pizzas/{id}/offer(id=${pizza.id})}">Aggiungi una nuova offerta</a>
+	</div>
 </body>
 </html>

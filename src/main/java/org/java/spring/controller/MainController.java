@@ -23,6 +23,7 @@ public class MainController {
 	@Autowired
 	private PizzaService pizzaService;
 	
+
 	@GetMapping("/pizzas")
 	public String pizzaIndex(Model model, @RequestParam(required=false) String pizzaName) {
 		
@@ -69,7 +70,9 @@ public class MainController {
 		
 		Pizza pizza = pizzaService.findById(id);
 		
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("offers", pizza.getSpecialOffers());
 		
 		return "pizza-detail";
 	}
