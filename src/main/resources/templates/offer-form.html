@@ -10,7 +10,8 @@
 
 <body>
 	<div class="container">
-		<h1>Aggiungi un'offerta per la [[${pizza.name}]]</h1>
+		<h1 th:if="${offer.id == 0}">Aggiungi una nuova Offerta per la [[${pizza.name}]]</h1>
+		<h1 th:unless="${offer.id == 0}">Modifica l'offerta della [[${pizza.name}]]</h1>
 		<form method="POST">
 			<!--Offer title-->
 			<div class="form-group my-2">
@@ -30,7 +31,10 @@
 				<label for="date-end">Data inizio offerta</label>
 				<input type="date" class="form-control" id="date-end" th:field="${offer.offerEnd}">
 			</div>
+			<div class="d-flex justify-content-between">
 			<button type="submit" class="btn btn-primary" value="STORE">Submit</button>
+			<a class="btn btn-secondary" th:href="@{/pizzas/{id}(id=${pizza.id})}">Torna Indietro</a>
+			</div>
 		</form>
 	</div>
 </body>

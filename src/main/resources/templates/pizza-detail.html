@@ -27,6 +27,7 @@
 		<ul th:unless="${offers.isEmpty()}">
 			<li th:each="offer : ${offers}">
 				[[${offer.title}]] - Data inizio: [[${offer.offerStart}]] - Data fine: [[${offer.offerEnd}]]
+				<a th:href="@{/pizzas/{id}/offer/{offerId}(id=${pizza.id}, offerId=${offer.id})}">Modifica l'offerta</a>
 			</li>
 		</ul>
 	</div>

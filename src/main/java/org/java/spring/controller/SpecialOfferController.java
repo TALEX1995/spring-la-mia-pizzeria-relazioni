@@ -42,4 +42,29 @@ public class SpecialOfferController {
 		
 		return "redirect:/pizzas";
 	}
+	
+	@GetMapping("/pizzas/{id}/offer/{offerId}")
+	public String editOffer(Model model, @PathVariable("id") int id, @PathVariable("offerId") int offerId) {
+		
+		Pizza pizza = pizzaService.findById(id);
+		
+		SpecialOffer offer = specialOfferService.findById(offerId);
+		
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("offer", offer);
+	
+		return "offer-form";
+	}
+	
+	@PostMapping("/pizzas/{id}/offer/{offerId}")
+	public String updateOffer(@ModelAttribute SpecialOffer specialOffer, @PathVariable("id") int pizzaId, @PathVariable("offerId") int offerId) {
+		
+		Pizza pizza = pizzaService.findById(pizzaId);
+		
+		specialOffer.setPizza(pizza);
+		
+		specialOfferService.save(specialOffer);
+		
+		return "redirect:/pizzas";
+	}
 }
