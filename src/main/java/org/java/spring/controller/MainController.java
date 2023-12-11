@@ -3,7 +3,9 @@ package org.java.spring.controller;
 
 import java.util.List;
 
+import org.java.spring.Ingredient;
 import org.java.spring.Pizza;
+import org.java.spring.db.serv.IngredientService;
 import org.java.spring.db.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class MainController {
 
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 
 	@GetMapping("/pizzas")
@@ -42,6 +47,9 @@ public class MainController {
 	public String pizzaCreate(Model model) {
 		
 		Pizza pizza = new Pizza();
+		List<Ingredient> ingredients = ingredientService.findAll();
+		
+		model.addAttribute("ingredients", ingredients);
 		
 		model.addAttribute("pizza", pizza);
 		return "pizza-form";
@@ -81,7 +89,9 @@ public class MainController {
 	public String pizzaEdit(Model model, @PathVariable int id) {
 		
 		Pizza pizza = pizzaService.findById(id);
+		List<Ingredient> ingredients = ingredientService.findAll();
 		
+		model.addAttribute("ingredients", ingredients);
 		model.addAttribute("pizza", pizza);
 		
 		return "pizza-form";

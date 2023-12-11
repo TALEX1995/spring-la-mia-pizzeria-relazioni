@@ -45,6 +45,20 @@
 				<div th:replace="frags :: errorDiv('price')" />
 		</div>
 		
+		<div 
+		th:each="ingredient : ${ingredients}"
+		th:object="${ingredient}">
+			<input
+			type="checkbox"
+			th:value="*{id}"
+			th:field="${pizza.ingredients}"
+			th:id="${'ingredient-' + ingredient.id}">
+			
+			<label th:for="${'ingredient-' + ingredient.id}">
+				[[*{title}]]
+			</label>
+		</div>
+		
 		<button type="submit" class="btn btn-primary" value="STORE">Submit</button>
 	</form>
 </body>

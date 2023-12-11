@@ -1,5 +1,7 @@
 package org.java.spring;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,14 +41,18 @@ public class Pizza {
 	@Column(nullable = false)
 	private float price;
 	
+
+	@ManyToMany
+	private List<Ingredient> ingredients;
 	
 	public Pizza() {}
 	
-	public Pizza(String name, String description, String photo, float price) {
+	public Pizza(String name, String description, String photo, float price, Ingredient...ingredients) {
 		setName(name);
 		setDescription(description);
 		setPhoto(photo);
 		setPrice(price);
+		setIngredients(ingredients);
 	}
 
 	public int getId() {
@@ -99,6 +106,20 @@ public class Pizza {
 	public void setSpecialOffers(Set<SpecialOffer> specialOffers) {
 		this.specialOffers = specialOffers;
 	}
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+	
+	public void setIngredients(Ingredient...ingredients) {
+		setIngredients(Arrays.asList(ingredients));
+	}
+	
+	
 
 
 	
