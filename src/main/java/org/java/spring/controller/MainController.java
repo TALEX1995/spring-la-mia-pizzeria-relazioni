@@ -28,6 +28,10 @@ public class MainController {
 	@Autowired
 	private IngredientService ingredientService;
 	
+	@GetMapping("/")
+	public String home() {
+		return "home";
+	}
 
 	@GetMapping("/pizzas")
 	public String pizzaIndex(Model model, @RequestParam(required=false) String pizzaName) {
